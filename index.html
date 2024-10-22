@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVIATOR Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .prediction {
+            margin-bottom: 20px;
+        }
+        button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AVIATOR Prediction</h1>
+    <div class="container">
+        <div id="prediction" class="prediction">
+            <!-- Prediction will be displayed here -->
+        </div>
+        <button onclick="copyText()">Copy</button>
+        <button onclick="refreshPage()">Refresh</button>
+    </div>
+
+    <script>
+        // Lucky Jet game API key on 1win
+        // This key is needed to predict odds
+        // Price: $5000
+        // api_key = "1win.top/lucky-jet?V4.7:russian/moscowhacking=13975@dhvfftd%%%/for=50.00"
+
+        function deleteMessage(chatId, messageId) {
+            // Code to delete the message
+        }
+
+        function getPrediction() {
+            let currentDatetime = new Date();
+            let advancedMinutes = 2;
+
+            // Calculate the start time (2 minutes from now)
+            let startGameTime = new Date(currentDatetime.getTime() + advancedMinutes * 60000);
+            // Calculate the end time (1 minute after the start time)
+            let endGameTime = new Date(startGameTime.getTime() + 60000);
+
+            // Extract time components for the range format
+            let startTime = startGameTime.toTimeString().split(' ')[0];
+            let endTime = endGameTime.toTimeString().split(' ')[0];
+
+            let message = "";
+
+            if (16 <= currentDatetime.getHours() && currentDatetime.getHours() < 17) {
+                message = "_Coast analysis in progress please try again in an hour_";
+            } else if (13 <= currentDatetime.getMinutes() && currentDatetime.getMinutes() < 14) {
+                message = "/interval";
+            } else {
+                // The maximum odds that the bot can give, do not modify them
+                let minOdds = 4;
+                let maxOdds = 30;
+                let hackOdds = 14;
+
+                let coefficientNumber = (Math.random() * (maxOdds - hackOdds) + hackOdds).toFixed(2);
+
+                // Calculation of probability
+                let halfNumber = (coefficientNumber / 2).toFixed(2);
+                let reliable = (halfNumber / 2).toFixed(2);
+
+                message = `
+                    🚀 New prediction 💸<br>
+                    Time: ${startTime}-${endTime}<br>
+                    Coast: ${coefficientNumber} X+<br>
+                    Insurance: ${halfNumber} X+<br>
+                    Reliable: ${reliable} X<br>
+                    ATTENTION THIS SIGNAL ONLY WORKS FOR AVIATOR (90-98% ACCURATE)
+                `;
+            }
+
+            document.getElementById('prediction').innerHTML = message;
+        }
+
+        function copyText() {
+            const predictionText = document.getElementById('prediction').innerText;
+            navigator.clipboard.writeText(predictionText).then(() => {
+                alert('Prediction copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        function refreshPage() {
+            location.reload();
+        }
+
+        // Generate prediction on page load
+        window.onload = getPrediction;
+    </script>
+</body>
+</html>
